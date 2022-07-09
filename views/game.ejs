@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>AgA-game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="question.css">
+  <script src="jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <div class="interaction-background" style="background-image: url(https://images.unsplash.com/photo-1624628639856-100bf817fd35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80); min-height: 100vh; background-position: center center; background-repeat: no-repeat; background-size: cover;">
+        <div class="hud row">
+            <div class="router-link col">
+                <a class="btn-back" title="Go Back" href="/user">
+                    <p>Go Back</p>
+                </a>
+            </div>
+            <span class="signpost col"><%=result[1]['qu']%></span>
+            <div class="router-link col">
+                <div class="scr-back" title="Go Back" href="">
+                    <p><%=result[0]+1%>/ 10</p>
+                </div>
+            </div>
+        </div>
+        <h2 class="interaction-question"></h2>
+        <div class="interaction-grid">
+            <img src="<%=result[1]['img']%>" class="grid-center interaction-image" alt="Interaction">
+            <button class="btn-answer option" id="o1"><%=result[1]['o1']%></button>
+            <button class="btn-answer option" id="o2"><%=result[1]['o2']%></button>
+            <button class="btn-answer option" id="o3"><%=result[1]['o3']%></button>
+            <button class="btn-answer option" id="o4"><%=result[1]['o4']%></button>
+        </div>
+        <div id="continue" style="visibility:  hidden ;  display: flex; justify-content: center; align-content: center;">
+                <button class="btn-answer option" id="cont" placeholder="/continue/0" style="width: 20%; display: flex; justify-content: center; align-content: center;">CONTINUE</button>
+        </div>
+        <div class="speech-box">
+            <p class="speech-p" id="talk">Choose option wisely!!</p>
+        </div>
+        <div class="helper-avatar-container">
+            <img src="Hippo.9bd1dce7.svg" class="helper-avatar" alt="helper-avatar">
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("#o1").click(function() {
+            if(<%=result[1]['ra']%> === 1)
+                $("#cont").attr('placeholder', '/continue/1');
+            else
+                $("#cont").attr('placeholder', '/continue/2')
+            $("#o1").css("background-color", "#059bff");
+            $("#o2").css("background-color", "#feee7e");
+            $("#o3").css("background-color", "#feee7e");
+            $("#o4").css("background-color", "#feee7e");
+            $("#talk").text('you think this option is correct??');
+            $("#continue").css("visibility", "visible");
+        });
+
+        $("#o2").click(function() {
+            if(<%=result[1]['ra']%> === 2)
+                 $("#cont").attr('placeholder', '/continue/1');
+            else
+                 $("#cont").attr('placeholder', '/continue/2');
+            $("#o1").css("background-color", "#feee7e");
+            $("#o2").css("background-color", "#059bff");
+            $("#o3").css("background-color", "#feee7e");
+            $("#o4").css("background-color", "#feee7e");
+            $("#talk").text('you think this option is correct??');
+            $("#continue").css("visibility", "visible");
+        });
+
+        $("#o3").click(function() {
+            if(<%=result[1]['ra']%> === 3)
+                 $("#cont").attr('placeholder', '/continue/1');
+            else
+                 $("#cont").attr('placeholder', '/continue/2');
+            $("#o1").css("background-color", "#feee7e");
+            $("#o2").css("background-color", "#feee7e");
+            $("#o3").css("background-color", "#059bff");
+            $("#o4").css("background-color", "#feee7e");
+            $("#talk").text('you think this option is correct??');
+            $("#continue").css("visibility", "visible");
+        });
+
+        $("#o4").click(function() {
+            if(<%=result[1]['ra']%> === 4)
+                 $("#cont").attr('placeholder', '/continue/1');
+            else
+                 $("#cont").attr('placeholder', '/continue/2');
+            $("#o1").css("background-color", "#feee7e");
+            $("#o2").css("background-color", "#feee7e");
+            $("#o3").css("background-color", "#feee7e");
+            $("#o4").css("background-color", "#059bff");
+            $("#talk").text('you think this option is correct??');
+            $("#continue").css("visibility", "visible");
+        });
+    </script>
+
+    <script type="text/javascript">
+        async function init() {
+          console.log(1);
+          await sleep(5000);
+          console.log(2);
+        }
+
+
+        $("#cont").click(async function() {
+            var link = $("#cont").attr('placeholder');
+            // await delay(3000);
+            if(link === '/continue/1')
+                alert('Right Answer!!');
+            else
+                alert('Wrong Answer!!');
+            location.replace(link);
+        });
+    </script>
+</body>
+      
+</html>
